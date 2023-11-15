@@ -101,7 +101,7 @@ MYSQL_PORT=3307
 Copiar el archivo htpasswd.dist a ./apache2-php/etc/apache2/ y añade usuarios para acceder a la intranet:
 
 ```bash
-cp dist/htpasswd.dist ./apache2-php/etc/apache2/
+cp dist/htpasswd.dist ./apache2-php/etc/apache2/.htpasswd
 ```
 
 Los usuarios tiene el formato:
