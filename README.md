@@ -13,7 +13,6 @@ docker-lamp
 │  │  └─ intranet.conf
 │  ├─ etc
 │  │  ├─ apache2
-│     │  └─ .htpasswd
 │  └─ www
 │     ├─ index.html
 │     ├─ intranet
@@ -22,6 +21,7 @@ docker-lamp
 │     └─ test-bd.php
 ├─ dist
 │  ├─ env.dist
+│  └─ htpasswd.dist
 ├─ docker-compose.yml
 ├─ docs
 │  └─ images
@@ -45,6 +45,7 @@ La estructura del proyecto `docker-lamp` es un entorno de desarrollo LAMP (Linux
   - **conf/**: Contiene archivos de configuración para Apache.
     - **000-default.conf**: La configuración predeterminada del Virtual Host para Apache.
     - **intranet.conf**: La configuración del Virtual Host para la intranet, accesible en un puerto específico o subdominio.
+  - **etc/apache2/**: Contiene archivos de configuración adicionales para el directorio apache2.
   - **www/**: Directorio que almacena los archivos del sitio web.
     - **index.html**: Página de inicio para el sitio principal.
     - **intranet/**: Carpeta que contiene los archivos para la sección de intranet del sitio.
@@ -54,6 +55,7 @@ La estructura del proyecto `docker-lamp` es un entorno de desarrollo LAMP (Linux
 
 - **dist/**: Contiene plantillas o archivos distribuibles, en este caso una versión de ejemplo del archivo `.env`.
   - **env.dist**: Una plantilla para el archivo de variables de entorno.
+  - **htpasswd.dist**: Una plantilla para con usuario de ejemplo inicial para acceder a la intranet
 
 - **docker-compose.yml**: Archivo YAML que define los servicios, redes y volúmenes para el proyecto, organizando y ejecutando múltiples contenedores Docker.
 
