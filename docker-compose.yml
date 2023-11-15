@@ -39,7 +39,7 @@ services:
         image: phpmyadmin/phpmyadmin
         container_name: daweb-docker-lamp-phpmyadmin
         ports:
-            - 8000:80
+            - 8080:80
         environment:
             MYSQL_USER: ${MYSQL_ROOT}
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
