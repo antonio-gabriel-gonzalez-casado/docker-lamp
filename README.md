@@ -109,7 +109,7 @@ Los usuarios tiene el formato:
 ```
 usuario:contraseña
 ```
-La constraseña se puede generar con la utilidad de apache2-utils o directamente usando un [generador online](https://hellotools.org/es/generar-cifrar-contrasena-para-archivo-htpasswd): 
+La constraseña se puede generar con la utilidad de apache2-utils o directamente usando un [generador online](https://hellotools.org/es/generar-cifrar-contrasena-para-archivo-htpasswd)
 
 ## Construir las Imágenes
 
@@ -141,10 +141,11 @@ Lanzar el comando que crea un usuario llamado usuario2 y pedirá que se introduz
 htpasswd /etc/apache2/.htpasswd usuario2
 ```
 
+### Prueba de los servicios:
 Para probar si los servicios están funcionando correctamente, acceder a los siguientes enlaces a través del navegador:
 
 - **Prueba del sitio principal**: [http://localhost](http://localhost)
-- **Prueba de la intranet**: [http://localhost:8060 (usando usuario 1 o el usuario creado en el paso anterior)](http://localhost:8060)
+- **Prueba de la intranet**: [http://localhost:8060 (usando usuario1 y contraseña:123456789 o el usuario creado en el paso anterior)](http://localhost:8060)
 - **Prueba de PHP Info**: [http://localhost/phpinfo.php](http://localhost/phpinfo.php)
 - **Prueba de Conexión a la Base de Datos**: [http://localhost/test-bd.php](http://localhost/test-bd.php)
 - **Prueba de phpmyadmin**: [http://localhost:8080 (con el usuario root y la contraseña establecida)](http://localhost:8080)
