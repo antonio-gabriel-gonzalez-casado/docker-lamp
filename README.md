@@ -166,7 +166,7 @@ Para acceder a las urls configuradas en los virtual host:
 - **Conexión a la Base de Datos**: [http://www.local/test-bd.php](http://www.localtest-bd.php)
 - **Phpmyadmin**: [http://www.local:8080 (con el usuario root y la contraseña establecida)](http://www.local:8080)
 
-Hay que modificar el fichero /etc/hosts del sistema operativo anfitrión (no el contenedor de docker) y añadir las siguientes líneas:
+Hay que modificar el fichero **/etc/hosts** del sistema operativo anfitrión (no el contenedor de docker) y añadir las siguientes líneas:
 ```
 127.0.0.1	www.local
 127.0.0.1	intranet.local
