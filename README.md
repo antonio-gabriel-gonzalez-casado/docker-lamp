@@ -132,7 +132,7 @@ docker-compose up -d
 Para acceder a al intranet se necesita crear un archivo .htpasswd con los nombres de usuario y sus contraseñas. Se puede usar la herramienta htpasswd para esto. Para ello accede al contenedor daweb-docker-lamp-apache2 a través del terminal mediante el siguiente comando:
 
 ```
-docker excec -it daweb-docker-lamp-apache2
+docker exec -it daweb-docker-lamp-apache2
 ```
 
 Lanzar el comando que crea un usuario llamado usuario2 y pedirá que se introduzca una contraseña:
