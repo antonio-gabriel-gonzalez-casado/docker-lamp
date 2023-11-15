@@ -1,0 +1,1 @@
+Fichero vacío para que se creen los directorios etc > apache2
