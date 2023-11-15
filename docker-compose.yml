@@ -1,40 +1,53 @@
 version: "3.1"
 services:
+    # Servicio mysql donde se instala una base de datos en el puerto 3307 (por posible ejecución de un servicio en el host de mysql en este puerto)
     db:
         image: mysql
+        container_name: daweb-docker-lamp-mysql
         ports: 
-            - "3306:3306"
+            - "3307:3306"
         command: --default-authentication-plugin=mysql_native_password
         environment:
-            MYSQL_DATABASE: dbname
-            MYSQL_PASSWORD: test
-            MYSQL_ROOT_PASSWORD: test 
+            MYSQL_DATABASE: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        # Volumenes para que los datos de la base de datos persistan cuando se regenera el contenedor    
         volumes:
             - ./mysql/dump:/docker-entrypoint-initdb.d
             - ./mysql/conf:/etc/mysql/conf.d
             - persistent:/var/lib/mysql
         networks:
             - default
+    # Servicio apache2 donde se instala un servidor web cuyo acceso está disponeble por dos puertos 80 y 8086
     www:
         build: ./apache2-php
+        container_name: daweb-docker-lamp-apache2
         ports: 
             - "80:80"
             - "8060:8060"
         volumes:
+            # Volumen para que los archivos de configuración de los sitios web publicado sean copiados del disco local a su ubicación correcta dentro del contenedor
             - ./apache2-php/www:/var/www/html
-        links:
-            - db
+            # Volumen para que los archivos de configuración de los virtual server sean copiados del disco local a su ubicación correcta dentro del contenedor
+            - ./apache2-php/conf:/etc/apache2/sites-available
         networks:
             - default
+        depends_on:
+            - db
+    # Servicio phpmyadmin para administrar la base de datos desde una interfaz web. Este servicio está disponible en el puerto 8080        
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
-        links: 
-            - db:db
+        container_name: daweb-docker-lamp-phpmyadmin
         ports:
             - 8000:80
         environment:
-            MYSQL_USER: root
-            MYSQL_PASSWORD: test
-            MYSQL_ROOT_PASSWORD: test 
+            MYSQL_USER: ${MYSQL_ROOT}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD} 
+            MYSQL_PORT: ${MYSQL_PORT} 
+        depends_on:
+            - db
+
+# Configuración por defecto de los volumenes de python  
 volumes:
     persistent:
