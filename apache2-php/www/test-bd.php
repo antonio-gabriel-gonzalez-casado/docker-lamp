@@ -10,7 +10,7 @@
             <?php
                 echo "<h1>¡Bienvenido a la infraestructura de LAMPP!</h1>";
 
-                $conn = mysqli_connect('db', 'root', 'test', "dbname");
+                $conn = mysqli_connect('db', 'root', 'test', "test");
                 $query = 'SELECT * From Persona';
                 $result = mysqli_query($conn, $query);
 

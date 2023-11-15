@@ -160,7 +160,7 @@ docker-compose down
 ## (Opcional) Configuración
 Para acceder a las urls configuradas en los virtual host:
 - **Sitio Principal**: [http://www.local](http://www.local)
-- **Intranet**: [http://intranet.local (usando usuario1 y contraseña:123456789 o el usuario creado en el paso anterior)](http://intranet.local)
+- **Intranet**: [http://intranet.local:8060 (usando usuario1 y contraseña:123456789 o el usuario creado en el paso anterior)](http://intranet.local:8060)
 - **PHP Info**: [http://www.local/phpinfo.php](http://www.local/phpinfo.php)
 - **Conexión a la Base de Datos**: [http://www.local/test-bd.php](http://www.localtest-bd.php)
 - **Phpmyadmin**: [http://www.local:8080 (con el usuario root y la contraseña establecida)](http://www.local:8080)
