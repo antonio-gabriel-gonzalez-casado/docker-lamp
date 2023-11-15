@@ -158,3 +158,18 @@ Para detener y eliminar los contenedores:
 docker-compose down
 ```
 
+## (Opcional) Configuración
+Para acceder a las urls configuradas en los virtual host:
+- **Sitio Principal**: [http://www.local](http://www.local)
+- **Intranet**: [http://intranet.local (usando usuario1 y contraseña:123456789 o el usuario creado en el paso anterior)](http://intranet.local)
+- **PHP Info**: [http://www.local/phpinfo.php](http://www.local/phpinfo.php)
+- **Conexión a la Base de Datos**: [http://www.local/test-bd.php](http://www.localtest-bd.php)
+- **Phpmyadmin**: [http://www.local:8080 (con el usuario root y la contraseña establecida)](http://www.local:8080)
+
+Hay que modificar el fichero /etc/hosts del sistema operativo anfitrión (no el contenedor de docker) y añadir las siguientes líneas:
+```
+127.0.0.1	www.local
+127.0.0.1	intranet.local
+```
+
+
