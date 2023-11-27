@@ -1,4 +1,4 @@
-# docker-lamp
+# daweb-docker-lamp
 Proyecto para la instalación de LAMP a través de contenedores Docker
 
 ```
@@ -170,5 +170,79 @@ Hay que modificar el fichero **/etc/hosts** del sistema operativo anfitrión (no
 127.0.0.1	www.local
 127.0.0.1	intranet.local
 ```
+## Instalación de Certificados SSL
 
+### Generación de Certificados
+
+Crear un directorio llamado certs en el directorio raiz del proyecto para almacenar los certificados.
+
+Se puede usar el comando:
+
+```bash
+mkdir certs
+cd certs
+```
+
+Lanzar el comando de generación de certificados de openssl:
+
+```bash
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout www.key -out www.crt
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout intranet.key -out intranet.crt
+```
+
+Este comando crea un certificado (crt) y una clave privada (key) válidos por 365 días.
+- x509: Especifica que quieres generar un certificado autofirmado.
+- nodes: Crea una clave sin contraseña.
+- days 365: El certificado será válido por 365 días.
+- newkey rsa:2048: Crea una nueva clave de 2048 bits.
+- keyout: El nombre del archivo para la clave privada (normalmente será el nombre del dominio)
+- out: El nombre del archivo para el certificado (normalmente será el nombre del dominio)
+
+Durante el proceso, se piden detalles como país, estado, organización, etc. 
+
+Para Common Name (Introducir el nombre del dominio www.local, intranet.local).
+
+
+### Configurar Virtual Host 443
+
+En cada archivo de configuración agregar una regla como esta replicando la configuración adicional de la ya existente:
+
+```
+<VirtualHost *:443>
+    ServerName www.local
+    SSLEngine on
+    SSLCertificateFile /etc/apache2/ssl/www.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/www.key
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName intranet.local
+    SSLEngine on
+    SSLCertificateFile /etc/apache2/ssl/intranet.crt
+    SSLCertificateKeyFile /etc/apache2/ssl/intranet.key
+</VirtualHost>
+```
+
+### Habilitar el módulo mod_ssl
+
+En el Dockerfile de apache2-php se deben copiar los certificados generados, para ello añade la siguiente línea:
+
+```
+# Copiar archivos de contraseñas
+COPY ./certs /etc/apache2/ssl
+```
+
+Además se debe habilitar el módulo ssl, para ello agregar la siguiente línea:
+
+```
+RUN a2enmod ssl
+```
+
+
+## (Opcional) Configuración
+Para acceder a las urls configuradas en los virtual host:
+- **Sitio Principal**: [https://www.local](https://www.local)
+- **Intranet**: [https://intranet.local (usando usuario1 y contraseña:123456789 o el usuario creado en el paso anterior)](https://intranet.local)
+- **PHP Info**: [https://www.local/phpinfo.php](https://www.local/phpinfo.php)
+- **Conexión a la Base de Datos**: [https://www.local/test-bd.php](https://www.localtest-bd.php)
 
